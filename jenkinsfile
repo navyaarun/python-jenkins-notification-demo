@@ -1,11 +1,12 @@
 pipeline {
-    agen any
+    agent any
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
                 url: 'https://github.com/navyaarun/calculator-app'
             }
+        }    
 
         stage('Install Dependencies') {
             steps {
@@ -18,6 +19,7 @@ pipeline {
                 sh 'pytest testcalculator.py'
             }
         }
+    }    
 
     post {
         success {
