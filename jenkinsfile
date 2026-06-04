@@ -1,0 +1,38 @@
+pipeline {
+    agen any
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                url: 'https://github.com/navyaarun/calculator-app'
+            }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r requirements.txt'
+            }
+        }  
+
+        stage('Run Tests') {
+            steps {
+                sh 'pytest testcalculator.py'
+            }
+        }
+
+    post {
+        success {
+            emailext(
+                subject: 'All stages completed successfully.',
+                body: 'The build was successful',
+                to: "navya.arunachala@gmail.com"
+            )
+        }
+        failure {
+            emailext(
+                subject: 'Build failed.',
+                body: 'The build has failed. Please check the Jenkins console output for details.',
+                to: "navya.arunachala@gmail.com"
+            )
+        }
+    }       
+}
