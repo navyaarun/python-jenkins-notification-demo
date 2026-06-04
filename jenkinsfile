@@ -26,14 +26,14 @@ pipeline {
             emailext(
                 subject: 'All stages completed successfully.',
                 body: 'The build was successful',
-                to: "demo@example.com"
+                to: "test@example.com"
             )
         }
         failure {
             emailext(
                 subject: 'Build failed.',
                 body: 'The build has failed. Please check the Jenkins console output for details.',
-                to: "demo@example.com"
+                to: "test@example.com"
             )
         }
     }       
